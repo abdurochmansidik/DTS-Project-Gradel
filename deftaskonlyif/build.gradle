@@ -1,0 +1,22 @@
+task extractMetadaa {
+    doLast {println 'Extracting metadata.'}}
+
+extractMetadata.onlyIf {
+    System.properties['extract.metadata'] == 'true'}
+
+task extractData {
+    doLast {println 'Extracting database data.'}}
+
+task extractDatabase
+
+extractDatabase {
+    doLast{println 'Zipping extracted data to backupdata.zip'}}
+
+extractDatabase {
+    doLast{println 'Closing database connection.'}}
+
+extractDatabase.dependsOn extractData, extractMetadata
+
+extractData {
+    doFirst {println 'Connection to the database.'}
+    doFirts {println 'Setting up database connection.'}}
